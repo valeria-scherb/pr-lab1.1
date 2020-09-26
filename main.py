@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
 import asyncio
+import json
 import websockets
+
+initial_message = json.dumps({'data': {'message': "Let's start"}})
 
 async def main():
     async with websockets.connect('wss://sprs.herokuapp.com/zeroth/valeria') as ws:
-        await ws.send('{ "data": { "message": "Let\'s start" } }')
+        await ws.send(initial_message)
         print(await ws.recv())
     pass
 
