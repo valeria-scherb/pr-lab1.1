@@ -36,8 +36,8 @@ async def main():
         x = problem['data']['matrix']
         for r in x:
             line = ''
-            for n in r:
-                line += '# ' if n == 1 else '. '
+            for el in r:
+                line += '# ' if el == 1 else '. '
             print(line)
         probs = {}
         for k in digits.keys():
