@@ -29,7 +29,11 @@ async def main():
         digits = templ['data']
         await ws.send(ready_message)
         problem = json.loads(await ws.recv())
-        print(problem)
+        for r in problem['data']['matrix']:
+            line = ''
+            for n in r:
+                line += '# ' if n == 1 else '. '
+            print(line)
     pass
 
 asyncio.get_event_loop().run_until_complete(main())
