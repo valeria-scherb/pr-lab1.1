@@ -53,6 +53,6 @@ class Recognizer:
         gk = self.gks[k]
         x = []
         for i in range(0, self.n):
-            n = r.choices([0, 1], [self.q, self.p])
+            n = r.choices([0, 1], [self.q, self.p], k=self.m)
             x.append([a ^ b for a, b in zip(gk[i], n)])
         return x
