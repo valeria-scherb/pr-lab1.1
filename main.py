@@ -6,10 +6,11 @@ import websockets
 
 initial_message = json.dumps({'data': {'message': "Let's start"}})
 ready_message = json.dumps({'data': {'message': "Ready"}})
+bye_messsage = json.dumps({'data': {'message': 'Bye'}})
 task = 'first'
 session = 'valeria'
 scale = 5
-p = 0.1
+p = 0.3
 q = 1.0 - p
 settings = {
     'width': scale, 
@@ -50,5 +51,14 @@ async def main():
             probs[k] = mult
         sprobs = sorted(probs.items(), key=lambda x: x[1], reverse=True)
         print(sprobs)
+        answer, certainity = sprobs[0]
+        print(answer, certainity)
+        cs = problem['data']['currentStep']
+        await ws.send(json.dumps({'data': {'step': cs, 'answer': answer}}))
+        step_res = json.loads(await ws.recv())
+        print(step_res)
+        await ws.send(bye_messsage)
+        summary = json.loads(await ws.recv())
+        print(summary)
 
 asyncio.get_event_loop().run_until_complete(main())
