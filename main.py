@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+"""
+Main program
+"""
 
 import asyncio
 import json

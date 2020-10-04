@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+"""
+Image recognition class
+"""
+
+import random as r
+
 
 class Recognizer:
     def __init__(self):
@@ -32,3 +38,21 @@ class Recognizer:
                 key = k
                 value = mul
         return key
+
+    def testing_generate_image(self, k, seed=None):
+        if seed is not None:
+            r.seed(seed)
+        gk = []
+        for i in range(0, self.n):
+            gk.append(r.choices([0, 1], k=self.m))
+        self.gks[k] = gk
+
+    def testing_generate_input(self, k, seed=None):
+        if seed is not None:
+            r.seed(seed)
+        gk = self.gks[k]
+        x = []
+        for i in range(0, self.n):
+            n = r.choices([0, 1], [self.q, self.p])
+            x.append([a ^ b for a, b in zip(gk[i], n)])
+        return x
