@@ -25,22 +25,22 @@ class TestRecognizer(unittest.TestCase):
         return ok
 
     def test_low_noises(self):
-        assert self.noise_checker(0.1) == 100
-        assert self.noise_checker(0.2) == 100
-        assert self.noise_checker(0.8) == 100
-        assert self.noise_checker(0.9) == 100
+        self.assertEqual(self.noise_checker(0.1), 100)
+        self.assertEqual(self.noise_checker(0.2), 100)
+        self.assertEqual(self.noise_checker(0.8), 100)
+        self.assertEqual(self.noise_checker(0.9), 100)
 
     def test_medium_noises(self):
-        assert self.noise_checker(0.3) >= 95
-        assert self.noise_checker(0.7) >= 95
+        self.assertGreaterEqual(self.noise_checker(0.3), 95)
+        self.assertGreaterEqual(self.noise_checker(0.7), 95)
 
     def test_high_noises(self):
-        assert self.noise_checker(0.35) >= 80
-        assert self.noise_checker(0.65) >= 80
+        self.assertGreaterEqual(self.noise_checker(0.35), 80)
+        self.assertGreaterEqual(self.noise_checker(0.65), 80)
 
     def test_highest_noises(self):
-        assert self.noise_checker(0.4) >= 50
-        assert self.noise_checker(0.6) >= 50
+        self.assertGreaterEqual(self.noise_checker(0.4), 50)
+        self.assertGreaterEqual(self.noise_checker(0.6), 50)
 
 
 if __name__ == '__main__':
