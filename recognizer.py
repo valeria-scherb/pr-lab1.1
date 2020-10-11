@@ -32,11 +32,13 @@ class Recognizer:
         value = -math.inf
         for k in self.gks.keys():
             gk = self.gks[k]
-            add = 0
+            sum1 = 0
+            sum2 = 0
             for i in range(0, self.n):
                 for j in range(0, self.m):
-                    add += self.ln_p * (x[i][j] ^ gk[i][j])
-                    add += self.ln_q * (1 ^ x[i][j] ^ gk[i][j])
+                    sum1 += x[i][j] ^ gk[i][j]
+                    sum2 += 1 ^ x[i][j] ^ gk[i][j]
+            add = self.ln_p * sum1 + self.ln_q * sum2
             if add > value:
                 key = k
                 value = add
