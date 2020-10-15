@@ -19,10 +19,17 @@ class Recognizer:
         self.m = m
 
     def set_noise_prob(self, p):
+        very_large_number = 10 ** 20
         self.p = p
         self.q = 1.0 - p
-        self.ln_p = math.log(p)
-        self.ln_q = math.log(1.0 - p)
+        try:
+            self.ln_p = math.log(p)
+        except ValueError:
+            self.ln_p = -very_large_number
+        try:
+            self.ln_q = math.log(1.0 - p)
+        except ValueError:
+            self.ln_q = -very_large_number
 
     def remember(self, k, g_x):
         self.gks[k] = g_x

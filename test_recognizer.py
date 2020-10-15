@@ -42,6 +42,10 @@ class TestRecognizer(unittest.TestCase):
         self.assertGreaterEqual(self.noise_checker(0.4), 50)
         self.assertGreaterEqual(self.noise_checker(0.6), 50)
 
+    def test_zero_noise(self):
+        self.assertEqual(self.noise_checker(0), 100)
+        self.assertEqual(self.noise_checker(1), 100)
+
 
 if __name__ == '__main__':
     unittest.main()
