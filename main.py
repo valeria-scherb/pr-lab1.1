@@ -10,7 +10,7 @@ import websockets
 from recognizer import Recognizer
 
 # Settings
-scale = 5
+scale = 20
 p = 0.4
 total = 100
 # End
