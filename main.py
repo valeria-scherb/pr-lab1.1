@@ -10,9 +10,10 @@ import websockets
 from recognizer import Recognizer
 
 # Settings
-scale = 20
+scale_w = 20
+scale_h = 10
 p = 0.4
-total = 100
+total = 10
 # End
 
 initial_message = json.dumps({'data': {'message': "Let's start"}})
@@ -22,8 +23,8 @@ task = 'first'
 session = 'valeria'
 q = 1.0 - p
 settings = {
-    'width': scale, 
-    'height': scale,
+    'width': scale_w,
+    'height': scale_h,
     'noise': p,
     'totalSteps': total,
     'shuffle': False
@@ -35,11 +36,12 @@ async def main():
     async with websockets.connect(url) as ws:
         await ws.send(initial_message)
         info = json.loads(await ws.recv())
-        n = scale * info['data']['height']
-        m = scale * info['data']['width']
+        # n = scale_h * info['data']['height']
+        # m = scale_w * info['data']['width']
         rec = Recognizer()
         rec.set_noise_prob(p)
-        rec.set_size(n, m)
+        # rec.set_size(n, m)
+        # Now automatically initialized by rec.remember
         await ws.send(json.dumps({'data': settings}))
         templates = json.loads(await ws.recv())
         digits = templates['data']

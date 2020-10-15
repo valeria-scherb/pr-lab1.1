@@ -32,6 +32,8 @@ class Recognizer:
             self.ln_q = -very_large_number
 
     def remember(self, k, g_x):
+        if self.n == 0 or self.m == 0:
+            self.set_size(len(g_x), len(g_x[0]))
         self.gks[k] = g_x
 
     def recognize(self, x):
